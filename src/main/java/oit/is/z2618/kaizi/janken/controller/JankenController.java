@@ -8,27 +8,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class JankenController {
-    private Janken janken;
+  private Janken janken;
 
-    public JankenController() {
-        this.janken = new Janken();
-    }
+  public JankenController() {
+    this.janken = new Janken();
+  }
 
-    @GetMapping("/janken")
-    public String janken(@RequestParam String username, Model model) {
-        model.addAttribute("username", username);
-        return "janken";
-    }
+  @GetMapping("/janken")
+  public String janken(@RequestParam String username, Model model) {
+    model.addAttribute("username", username);
+    return "janken";
+  }
 
-    @GetMapping("/janken/play")
-    public String playJanken(@RequestParam(name = "hand") String yourHand, Model model) {
-        janken.setPlayerHand(yourHand);
-        String result = janken.judge();
+  @GetMapping("/janken/play")
+  public String playJanken(@RequestParam(name = "hand") String yourHand, Model model) {
+    janken.setPlayerHand(yourHand);
+    String result = janken.judge();
 
-        model.addAttribute("yourHand", janken.getPlayerHand());
-        model.addAttribute("cpuHand", janken.getCpuHand());
-        model.addAttribute("result", result);
+    model.addAttribute("yourHand", janken.getPlayerHand());
+    model.addAttribute("cpuHand", janken.getCpuHand());
+    model.addAttribute("result", result);
 
-        return "janken";
-    }
+    return "janken";
+  }
 }
