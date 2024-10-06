@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>じゃんけん</title>
+</head>
+
+<body>
+  <h1>Janken Game!</h1>
+  <p>Hi <span th:text="${username}">User</span></p>
+
+  <a href="/janken/play?hand=グー">グー</a>
+  <a href="/janken/play?hand=チョキ">チョキ</a>
+  <a href="/janken/play?hand=パー">パー</a>
+
+  <div>
+    <h3>結果</h3>
+    <p>あなたの手: <span th:text="${yourHand}"></span></p>
+    <p>相手の手: <span th:text="${cpuHand}"></span></p>
+    <p>結果: <span th:text="${result}"></span></p>
+  </div>
+</body>
+
+</html>
