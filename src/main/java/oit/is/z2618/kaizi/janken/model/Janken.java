@@ -1,5 +1,8 @@
 package oit.is.z2618.kaizi.janken.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Janken {
   private String playerHand;
   private String cpuHand = "グー";
