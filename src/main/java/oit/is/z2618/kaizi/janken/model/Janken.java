@@ -5,7 +5,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class Janken {
   private String playerHand;
-  private String cpuHand = "グー";
+  private String cpuHand;
+
+  public Janken() {
+    this.cpuHand = "グー";
+  }
 
   public void setPlayerHand(String playerHand) {
     this.playerHand = playerHand;
