@@ -4,6 +4,8 @@ import java.security.Principal;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import oit.is.z2618.kaizi.janken.model.Janken;
 import oit.is.z2618.kaizi.janken.model.User;
 import oit.is.z2618.kaizi.janken.model.UserMapper;
-import oit.is.z2618.kaizi.janken.model.Match; // 追加
-import oit.is.z2618.kaizi.janken.model.MatchMapper; // 追加
+import oit.is.z2618.kaizi.janken.model.Match;
+import oit.is.z2618.kaizi.janken.model.MatchMapper;
 
 @Controller
 public class JankenController {
@@ -23,7 +25,7 @@ public class JankenController {
   private UserMapper userMapper;
 
   @Autowired
-  private MatchMapper matchMapper; // 追加
+  private MatchMapper matchMapper;
 
   @Autowired
   public JankenController(Janken janken) {
@@ -32,16 +34,20 @@ public class JankenController {
 
   @GetMapping("/janken")
   public String janken(Model model, Principal prin) {
+    if (prin == null) {
+      return "redirect:/login"; // Redirect if user is not logged in
+    }
+
     String loginUser = prin.getName();
     model.addAttribute("login_user", loginUser);
 
-    // ユーザー情報を取得
+    // Fetch user information
     ArrayList<User> users = userMapper.selectAllUsers();
     model.addAttribute("users", users);
 
-    // 試合情報を取得
-    ArrayList<Match> matches = matchMapper.selectAllMatches(); // 追加
-    model.addAttribute("matches", matches); // 追加
+    // Fetch match information
+    ArrayList<Match> matches = matchMapper.selectAllMatches();
+    model.addAttribute("matches", matches);
 
     return "janken.html";
   }
@@ -60,5 +66,26 @@ public class JankenController {
     model.addAttribute("users", users);
 
     return "janken.html";
+  }
+
+  @GetMapping("/match")
+  public String match(@RequestParam int id, Model model) {
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    String username = auth.getName();
+
+    User currentUser = userMapper.selectByUsername(username);
+    if (currentUser == null) {
+      return "redirect:/login"; // Redirect if user not found
+    }
+
+    User opponent = userMapper.selectById(id);
+    if (opponent == null) {
+      return "redirect:/janken"; // Redirect if opponent not found
+    }
+
+    model.addAttribute("user", currentUser);
+    model.addAttribute("opponent", opponent);
+
+    return "match.html";
   }
 }

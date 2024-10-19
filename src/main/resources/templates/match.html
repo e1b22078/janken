@@ -1,13 +1,18 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
-<head>
-  <meta charset="utf-8">
-  <title>Match</title>
-</head>
-
 <body>
-  <p>[[${user.username}]] vs [[${opponent.username}]]</p>
-</body>
+  <div><a href="/logout">ログアウト</a></div>
+  <h1>Match</h1>
+  <p>[[${user.username}]] V.S. [[${opponent.username}]]</p>
 
-</html>
+  <a href="/janken/play?hand=グー">グー</a>
+  <a href="/janken/play?hand=チョキ">チョキ</a>
+  <a href="/janken/play?hand=パー">パー</a>
+
+  <div th:if="${yourHand}">
+    <h3>結果</h3>
+    <p>あなたの手: [[${yourHand}]]</p>
+    <p>CPUの手: [[${cpuHand}]]</p>
+    <p>結果: [[${result}]]</p>
+  </div>
+
+  <a href="/janken">もどる</a>
+</body>
