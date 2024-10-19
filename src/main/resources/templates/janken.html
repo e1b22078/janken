@@ -1,17 +1,36 @@
-<h2>試合結果</h2>
-<table>
-  <tr>
-    <th>試合ID</th>
-    <th>ユーザー1</th>
-    <th>ユーザー2</th>
-    <th>ユーザー1の手</th>
-    <th>ユーザー2の手</th>
-  </tr>
-  <tr th:each="match : ${matches}">
-    <td>[[${match.id}]]</td>
-    <td th:text="${users[match.user1Id - 1].userName}">ユーザー名</td> <!-- users配列から名前を取得 -->
-    <td th:text="${users[match.user2Id - 1].userName}">ユーザー名</td>
-    <td>[[${match.user1Hand}]]</td>
-    <td>[[${match.user2Hand}]]</td>
-  </tr>
-</table>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/schema/security">
+
+<head>
+  <meta charset="utf-8">
+  <title>JANKEN GAME!</title>
+</head>
+
+<body>
+  <div><a href="/logout">ログアウト</a></div>
+  <h1>JANKEN GAME!</h1>
+  <p>Hi [[${login_user}]]</p>
+  <h2>エントリー</h2>
+  <ul>
+    <li th:each="user : ${users}">[[${user.userName}]]</li>
+  </ul>
+
+  <a href="/janken/play?hand=グー">グー</a>
+  <a href="/janken/play?hand=チョキ">チョキ</a>
+  <a href="/janken/play?hand=パー">パー</a>
+
+  <div th:if="${yourHand}">
+    <h3>結果</h3>
+    <p>あなたの手: [[${yourHand}]]</p>
+    <p>CPUの手: [[${cpuHand}]]</p>
+    <p>結果: [[${result}]]</p>
+  </div>
+
+  <h2>試合結果</h2>
+  <div th:each="match : ${matches}">
+    <p>id:[[${match.id}]] user1:[[${match.user1}]] user2:[[${match.user2}]] user1の手:[[${match.user1Hand}]]
+      user2の手:[[${match.user2Hand}]]</p>
+  </div>
+</body>
+
+</html>

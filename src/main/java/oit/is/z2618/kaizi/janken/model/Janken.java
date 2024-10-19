@@ -1,18 +1,24 @@
 package oit.is.z2618.kaizi.janken.model;
 
 import org.springframework.stereotype.Component;
+import java.util.Random;
 
 @Component
 public class Janken {
   private String playerHand;
   private String cpuHand;
 
-  public Janken() {
-    this.cpuHand = "グー";
-  }
-
   public void setPlayerHand(String playerHand) {
     this.playerHand = playerHand;
+    this.cpuHand = getRandomHand(); // CPUの手をランダムに設定
+  }
+
+  public String getPlayerHand() {
+    return playerHand;
+  }
+
+  public String getCpuHand() {
+    return cpuHand;
   }
 
   public String judge() {
@@ -27,11 +33,8 @@ public class Janken {
     }
   }
 
-  public String getPlayerHand() {
-    return playerHand;
-  }
-
-  public String getCpuHand() {
-    return cpuHand;
+  private String getRandomHand() {
+    String[] hands = { "グー", "チョキ", "パー" };
+    return hands[new Random().nextInt(hands.length)];
   }
 }
