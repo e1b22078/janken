@@ -1,12 +1,12 @@
 CREATE TABLE users (
-    id IDENTITY PRIMARY KEY,
-    username VARCHAR NOT NULL
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255)
 );
 
 CREATE TABLE matches (
-    id IDENTITY,
-    user1 INT NOT NULL,
-    user2 INT NOT NULL,
-    user1Hand VARCHAR NOT NULL,
-    user2Hand VARCHAR NOT NULL
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user1 INT,
+    user2 INT,
+    user1Hand VARCHAR(10),
+    user2Hand VARCHAR(10)
 );
