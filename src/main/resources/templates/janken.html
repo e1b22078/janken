@@ -9,12 +9,13 @@
 <body>
   <div><a href="/logout">ログアウト</a></div>
   <h1>JANKEN GAME!</h1>
-  <p>Hi [[${login_user}]]</p>
+  <p>Hi [[${user.username}]]</p>
 
   <h2>エントリー</h2>
   <ul>
     <li th:each="user : ${users}">
-      <a th:href="@{/match(id=${user.id})}"> [[${user.name}]]</a></li>
+      <a th:href="@{/match(id=${user.id})}">[[${user.username}]]</a>
+    </li>
   </ul>
 
   <h2>試合結果</h2>

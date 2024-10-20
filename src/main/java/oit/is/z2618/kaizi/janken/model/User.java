@@ -1,18 +1,8 @@
 package oit.is.z2618.kaizi.janken.model;
 
-public class User{
-  int id;
-  String userName;
-
-  // Thymeleafでフィールドを扱うためにはgetter/setterが必ず必要
-  // vscodeのソースコード右クリック->ソースアクションでsetter/getterを簡単に追加できる
-  public String getUserName() {
-    return userName;
-  }
-
-  public void setUserName(String userName) {
-    this.userName = userName;
-  }
+public class User {
+  private int id;
+  private String username;
 
   public int getId() {
     return id;
@@ -22,4 +12,11 @@ public class User{
     this.id = id;
   }
 
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
 }
