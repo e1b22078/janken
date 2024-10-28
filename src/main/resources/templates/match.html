@@ -13,9 +13,10 @@
 
 
   <h2>手を選ぶ</h2>
-  <a th:href="@{/fight(hand='グー')}">グー</a>
-  <a th:href="@{/fight(hand='チョキ')}">チョキ</a>
-  <a th:href="@{/fight(hand='パー')}">パー</a>
+  <a th:href="@{/fight(hand='グー', opponentId=${opponent.id})}">グー</a>
+  <a th:href="@{/fight(hand='チョキ', opponentId=${opponent.id})}">チョキ</a>
+  <a th:href="@{/fight(hand='パー', opponentId=${opponent.id})}">パー</a>
+
 
   <div th:if="${yourHand}">
     <h3>結果</h3>

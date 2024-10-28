@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <title>Wait</title>
+  <script>
+    setInterval(function () {
+      fetch('/api/get-match-result')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          const resultDiv = document.getElementById('result');
+          if (data) {
+            resultDiv.innerHTML = '結果: ' + data.result;
+            // 結果が表示されたら、データベースを更新する処理を追加
+          } else {
+            resultDiv.innerHTML = '相手の手を待っています...';
+          }
+        })
+        .catch(error => {
+          console.error('Fetch error:', error);
+          const resultDiv = document.getElementById('result');
+          resultDiv.innerHTML = '結果を取得できませんでした。';
+        });
+    }, 2000);
+  </script>
+</head>
+
+<body>
+  <div><a href="/logout">ログアウト</a></div>
+  <h1>待機中</h1>
+  <h2>相手の手を待ってます</h2>
+  <h3>Hi [[${user.username}]]</h3>
+  <div id="result"></div>
+</body>
+
+</html>

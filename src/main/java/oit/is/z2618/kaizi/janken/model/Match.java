@@ -6,6 +6,7 @@ public class Match {
   private int user2;
   private String user1Hand;
   private String user2Hand;
+  private boolean isActive;
 
   public int getId() {
     return id;
@@ -45,5 +46,26 @@ public class Match {
 
   public void setUser2Hand(String user2Hand) {
     this.user2Hand = user2Hand;
+  }
+
+  public boolean getIsActive() {
+    return isActive;
+  }
+
+  public void setIsActive(boolean isActive) {
+    this.isActive = isActive;
+  }
+
+  public String getWinner() {
+    if (user1Hand.equals(user2Hand)) {
+      return "Draw"; // 引き分け
+    }
+    if ((user1Hand.equals("rock") && user2Hand.equals("scissors")) ||
+        (user1Hand.equals("scissors") && user2Hand.equals("paper")) ||
+        (user1Hand.equals("paper") && user2Hand.equals("rock"))) {
+      return "User 1 wins"; // user1の勝ち
+    } else {
+      return "User 2 wins"; // user2の勝ち
+    }
   }
 }
