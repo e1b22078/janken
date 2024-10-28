@@ -4,9 +4,18 @@ CREATE TABLE users (
 );
 
 CREATE TABLE matches (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user1 INT,
-    user2 INT,
-    user1Hand VARCHAR(10),
-    user2Hand VARCHAR(10)
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user1 INT,
+  user2 INT,
+  user1Hand VARCHAR(10),
+  user2Hand VARCHAR(10),
+  isActive BOOLEAN
 );
+
+CREATE TABLE matchinfo (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user1 INT,
+  user2 INT,
+  user1Hand VARCHAR(10),
+  isActive BOOLEAN
+)
